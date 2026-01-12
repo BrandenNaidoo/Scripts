@@ -1,0 +1,16 @@
+name: PowerShell Analysis
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    name: PSScriptAnalyzer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Invoke-ScriptAnalyzer -Path . -Recurse -Severity Warning -ErrorAction SilentlyContinue
